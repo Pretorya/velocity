@@ -1,0 +1,108 @@
+<% content_for :title, "FAQ - VELOCITY" %>
+
+<%
+  faqs = [
+    {
+      category: "Commandes",
+      items: [
+        {
+          q: "Comment passer une commande ?",
+          a: "Ajoute les produits souhaités à ton panier, puis clique sur \"Commander\" dans la page panier. Tu seras redirigé vers notre page de paiement sécurisé Stripe."
+        },
+        {
+          q: "Puis-je modifier ou annuler ma commande ?",
+          a: "Tu peux annuler ou modifier ta commande dans les 2 heures suivant la confirmation. Passé ce délai, la commande est transmise à notre entrepôt et ne peut plus être modifiée. Contacte-nous rapidement via le formulaire de contact."
+        },
+        {
+          q: "Quels moyens de paiement acceptez-vous ?",
+          a: "Nous acceptons toutes les cartes bancaires (Visa, Mastercard, American Express) via Stripe, qui garantit un paiement 100% sécurisé. Aucune donnée bancaire n'est stockée sur nos serveurs."
+        }
+      ]
+    },
+    {
+      category: "Livraison",
+      items: [
+        {
+          q: "Quels sont les délais de livraison ?",
+          a: "La livraison standard est effectuée en 3 à 5 jours ouvrés. Une livraison express en 24h est disponible pour les commandes passées avant 12h du lundi au vendredi."
+        },
+        {
+          q: "La livraison est-elle gratuite ?",
+          a: "La livraison est offerte pour toute commande supérieure à 100 €. En dessous de ce montant, des frais de 4,90 € s'appliquent."
+        },
+        {
+          q: "Livrez-vous à l'international ?",
+          a: "Oui, nous livrons dans toute l'Union Européenne. Les délais et frais varient selon le pays de destination. Pour les livraisons hors UE, contacte notre service client."
+        }
+      ]
+    },
+    {
+      category: "Retours & Remboursements",
+      items: [
+        {
+          q: "Quelle est votre politique de retour ?",
+          a: "Tu disposes de 30 jours à compter de la réception pour retourner un article non porté et dans son emballage d'origine. Les retours sont gratuits depuis la France métropolitaine."
+        },
+        {
+          q: "Quand serai-je remboursé ?",
+          a: "Le remboursement est effectué sous 5 à 10 jours ouvrés après réception et validation du retour, sur le moyen de paiement utilisé lors de la commande."
+        }
+      ]
+    },
+    {
+      category: "Produits",
+      items: [
+        {
+          q: "Comment choisir ma pointure ?",
+          a: "Nos chaussures sont taillées conformément aux standards européens. En cas de doute entre deux pointures, nous recommandons de prendre la taille supérieure, notamment pour les modèles Running."
+        },
+        {
+          q: "Les coloris affichés sont-ils disponibles en stock ?",
+          a: "Oui, tous les coloris visibles sur le site sont disponibles. En cas de rupture de stock sur un coloris particulier, la fiche produit l'indiquera clairement."
+        },
+        {
+          q: "Comment entretenir mes chaussures Velocity ?",
+          a: "Évite de mettre tes chaussures en machine. Nettoie-les à la main avec une brosse douce et de l'eau savonneuse. Laisse sécher à l'air libre, loin de toute source de chaleur directe."
+        }
+      ]
+    }
+  ]
+%>
+
+<section class="pt-32 pb-20 bg-white min-h-screen">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="mb-14">
+      <h2 class="font-display text-5xl font-bold mb-3">FAQ</h2>
+      <p class="text-gray-500">Retrouve les réponses aux questions les plus fréquentes.</p>
+    </div>
+
+    <div class="space-y-12">
+      <% faqs.each do |section| %>
+        <div>
+          <h3 class="font-display text-2xl font-bold mb-6 pb-3 border-b border-gray-100"><%= section[:category].upcase %></h3>
+          <div class="space-y-1">
+            <% section[:items].each_with_index do |item, i| %>
+              <details class="group border-b border-gray-100" <%= i == 0 ? "open" : "" %>>
+                <summary class="flex justify-between items-center py-5 cursor-pointer list-none">
+                  <span class="font-medium text-base pr-6"><%= item[:q] %></span>
+                  <svg class="w-5 h-5 flex-shrink-0 text-gray-400 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </summary>
+                <p class="pb-5 text-gray-500 text-sm leading-relaxed"><%= item[:a] %></p>
+              </details>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="mt-16 bg-gray-50 rounded-3xl p-10 text-center">
+      <p class="font-bold text-lg mb-2">Tu n'as pas trouvé ta réponse ?</p>
+      <p class="text-gray-500 text-sm mb-6">Notre équipe est disponible du lundi au vendredi, 9h–18h.</p>
+      <%= link_to "Nous contacter", contact_path, class: "magnetic-btn bg-black text-white px-8 py-3 rounded-full font-semibold hover:bg-red-600 transition-colors inline-block text-sm" %>
+    </div>
+
+  </div>
+</section>

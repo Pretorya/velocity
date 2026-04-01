@@ -1,0 +1,48 @@
+<% content_for :title, "Tous les produits - VELOCITY" %>
+
+<section class="pt-32 pb-20 bg-white min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="mb-12">
+      <% if @query.present? %>
+        <h2 class="font-display text-5xl font-bold">RECHERCHE</h2>
+        <p class="text-gray-500 mt-2"><%= @products.size %> résultat<%= @products.size > 1 ? "s" : "" %> pour "<%= @query %>"</p>
+      <% else %>
+        <h2 class="font-display text-5xl font-bold">NOUVEAUTÉS</h2>
+        <p class="text-gray-500 mt-2">Tous nos modèles (<%= @products.size %>)</p>
+      <% end %>
+    </div>
+
+    <div class="dynamic-grid">
+      <% @products.each do |product| %>
+        <%= link_to product_path(product), class: "shoe-card bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl group" do %>
+          <div class="relative mb-4 overflow-hidden rounded-xl bg-gray-100 aspect-square">
+            <%= image_tag product.image_url, alt: product.name, class: "shoe-image w-full h-full object-cover transition-transform duration-500" %>
+            <% if product.badge.present? %>
+              <span class="absolute top-4 left-4 <%= product.badge_color %> text-white text-xs px-3 py-1 rounded-full">
+                <%= product.badge %>
+              </span>
+            <% end %>
+          </div>
+          <div class="space-y-2">
+            <p class="text-xs text-gray-500 uppercase tracking-wide"><%= product.category.name %></p>
+            <h4 class="font-bold text-lg"><%= product.name %></h4>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <p class="font-display text-xl font-bold"><%= product.formatted_price %></p>
+                <% if product.old_price? %>
+                  <p class="text-sm text-gray-400 line-through"><%= product.formatted_old_price %></p>
+                <% end %>
+              </div>
+              <div class="flex gap-1">
+                <% product.color_classes.each do |color| %>
+                  <div class="w-4 h-4 rounded-full <%= color %> border-2 border-white shadow-sm"></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>
